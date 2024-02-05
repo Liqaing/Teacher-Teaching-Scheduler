@@ -8,16 +8,19 @@ public class Teacher {
     private List<Course> Teaching_Course;
     private int numberOfTeachingClass = 5;
 
-    private int number_of_teaching_course;
-    //private Course[] Course;
-    private Schedule schedule;
+    //private int number_of_teaching_course;
+    //private Schedule schedule;
 
     public Teacher(String name, List<String> availability, Course... teaching_Course) {
         this.Name = name;
         Availability = availability;
+
         this.Teaching_Course = new ArrayList<>();
         for (Course course : teaching_Course) {
             this.Teaching_Course.add(course);
+
+            // Add this teacher to course
+            course.addTeacher(this);
         }
     }
 
@@ -40,4 +43,6 @@ public class Teacher {
     public String getName() {
         return Name;
     }
+
+
 }
