@@ -58,10 +58,10 @@ public class Main {
         classes.add(E4);
         classes.add(E5);
 
-        Schedule_Generator.assignCourse(classes, courses, teacher);
-//        for (SchoolClass myClass : classes) {
-//            System.out.println(myClass.getAssignedTeacher().get(java).getName());
-//        }
+        //Schedule_Generator.assignCourse(classes, courses, teacher);
+        //for (SchoolClass myClass : classes) {
+        //    System.out.println(myClass.getAssignedTeacher().get(java).getName());
+        //}
 
     }
 

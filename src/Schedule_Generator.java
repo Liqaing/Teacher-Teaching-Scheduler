@@ -12,44 +12,66 @@ public class Schedule_Generator {
 
     // Get random index from list
     private static <T> T getRandomElement(List<T> list) {
+        if (list == null || list.isEmpty()) {
+            throw new IllegalArgumentException("List is null or empty");
+        }
+
         Random random = new Random();
         return list.get(random.nextInt(list.size()));
     }
 
-//    private static void addTeacherToCourse(List<Course> courses, List<Teacher> teachers) {
-//        for (Teacher teacher : teachers) {
-//            // List of courses which teacher can teach
-//            List<Course> teachingCourse = teacher.getTeaching_Course();
-//            for (Course course : teachingCourse) {
-//
-//            }
-//        }
-//    }
-
-    // For each class, assign teacher to coursea
+    // For each class, assign teacher to courses
     public static void assignCourse(List<SchoolClass> classes, List<Course> courses, List<Teacher> teachers) {
 
-        for (SchoolClass schoolClass : classes) {
+        for (Course course : courses) {
 
-            // While class still not have all teacher
-            for (Course course : courses) {
+            for (SchoolClass schoolClass : classes) {
+
+                // List of teachers who can teach that course
+                List<Teacher> availableTeachers = course.getTeachers();
+
+                // Pick random teacher
+                Teacher teacher;
+                if (availableTeachers == null || availableTeachers.isEmpty()) {
+                    teacher = getRandomElement(teachers);
+                }
+                else {
+                    teacher = getRandomElement(availableTeachers);
+
+                    // If teacher already teach 5 class
+                    while (teacher.getNumberOfTeachingClass() <= 0) {
+                        availableTeachers.remove(teacher);
+                        try {
+                            teacher = getRandomElement(availableTeachers);
+                        }
+                        catch (IllegalArgumentException e) {
+                            teacher = getRandomElement(teachers);
+                        }
+                    }
+
+                    // If teacher has been assign to the class yet
+                    while (schoolClass.isTheTeacherAssigned(teacher)) {
+                        availableTeachers.remove(teacher);
+                        try {
+                            teacher = getRandomElement(availableTeachers);
+                        }
+                        catch (IllegalArgumentException e) {
+                            teacher = getRandomElement(teachers);
+                        }
+                    }
+                }
 
                 // If no teacher have been assign to that course yet
-                while (schoolClass.getAssignedTeacher(course) == null) {
+                if (schoolClass.getAssignedTeacher(course) == null) {
 
-                    // Pick a random teacher who can teach that course
-                    Teacher teacher = getRandomElement(course.getTeachers());
-
-                    // If teacher can take more classes and he have not been assign to the class yet
-                    if (teacher.getNumberOfTeachingClass() > 0 && !schoolClass.isTheTeacherAssigned(teacher)) {
-
-                        // Assign the teacher
-                        schoolClass.assignTeacher(course, teacher);
-                        System.out.println(teacher.getName());
-                    }
+                    // Assign the teacher
+                    schoolClass.assignTeacher(course, teacher);
+                    teacher.reduceNumberOfTeachingClass();
+                    System.out.println(teacher.getName() + " teach class " + schoolClass.getClassName() + " " + course.getCourseName());
 
                 }
             }
+
         }
     }
 

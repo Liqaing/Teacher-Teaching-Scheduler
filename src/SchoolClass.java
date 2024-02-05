@@ -6,7 +6,6 @@ import java.util.List;
 public class SchoolClass {
     private String className;
     private Schedule classSchedule;
-
     private Map<Course, Teacher> assignedTeacher;
 
     public SchoolClass(String className, List<Course> courses) {
@@ -24,6 +23,8 @@ public class SchoolClass {
     public Teacher getAssignedTeacher(Course course) {
         return assignedTeacher.get(course);
     }
+
+
 
     // Check if all course have teacher
     public boolean areAllTeacherAssigned() {
@@ -47,5 +48,9 @@ public class SchoolClass {
 
     public Map<Course, Teacher> getAssignedTeacher() {
         return assignedTeacher;
+    }
+
+    public String getClassName() {
+        return className;
     }
 }
