@@ -1,7 +1,12 @@
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 
 public class Schedule {
-    private String[] Monday = new String[2];
-    // private HashMap<String, String[]> schedule = HashMap.newHashMap();
+    Map<String, Map<Integer, Course>> schedule;
+
+    public Schedule() {
+        schedule = new HashMap<>();
+    }
 }

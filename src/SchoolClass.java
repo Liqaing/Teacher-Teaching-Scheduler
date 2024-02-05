@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -6,7 +7,6 @@ import java.util.List;
 public class SchoolClass {
     private String className;
     private Schedule classSchedule;
-
     private Map<Course, Teacher> assignedTeacher;
 
     public SchoolClass(String className, List<Course> courses) {
@@ -47,5 +47,14 @@ public class SchoolClass {
 
     public Map<Course, Teacher> getAssignedTeacher() {
         return assignedTeacher;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public List<Teacher> getAllTeachers() {
+        List<Teacher> teachers = new ArrayList<>(assignedTeacher.values());
+        return teachers;
     }
 }
