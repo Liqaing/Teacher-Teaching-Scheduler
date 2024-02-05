@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
 
 public class Course {
@@ -23,5 +24,18 @@ public class Course {
 
     public String getCourseName() {
         return courseName;
+=======
+
+public class Course {
+    private String courseName;
+    private ArrayList<Teacher> teachers;
+
+    public Course(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public void addTeachers(Teacher teachers) {
+        this.teachers.add(teachers);
+>>>>>>> origin/algorithms
     }
 }
