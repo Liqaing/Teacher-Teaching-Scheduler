@@ -24,8 +24,6 @@ public class SchoolClass {
         return assignedTeacher.get(course);
     }
 
-
-
     // Check if all course have teacher
     public boolean areAllTeacherAssigned() {
         for (Teacher teacher : assignedTeacher.values()) {
