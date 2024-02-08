@@ -9,4 +9,15 @@ public class Schedule {
     public Schedule() {
         schedule = new HashMap<>();
     }
+
+    public void setSchedulePeriod(String day, Map<Integer, Course> periodCourse) {
+        this.schedule.put(day, periodCourse);
+    }
+
+    public Map<Integer, Course> getScheduleByDay(String day) {
+        Map<Integer, String> scheduleForPeriod = new HashMap<>();
+        Map<Integer, Course> periodCourse = schedule.get(day);
+        scheduleForPeriod.put(periodCourse.)
+        return schedule.get(day);
+    }
 }

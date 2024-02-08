@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import  java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Schedule_Generator {
 
@@ -69,7 +67,7 @@ public class Schedule_Generator {
                     schoolClass.assignTeacher(course, teacher);
                     teacher.setClassTeachingSession(schoolClass, 2);
                     teacher.reduceNumberOfTeachingClass();
-                    System.out.println(teacher.getName() + " teach class " + schoolClass.getClassName() + " " + course.getCourseName() + " session: " + teacher.getClassTeachingSession(schoolClass));
+//                    System.out.println(teacher.getName() + " teach class " + schoolClass.getClassName() + " " + course.getCourseName() + " session: " + teacher.getClassTeachingSession(schoolClass));
                 }
             }
 
@@ -78,6 +76,9 @@ public class Schedule_Generator {
 
     // Generate schedule
     public static void generateSchedule(List<SchoolClass> classes, List<Course> courses, List<Teacher> teachers) {
+
+        Schedule_Generator.assignCourse(classes, courses, teachers);
+
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         Integer[] periods = {1, 2};
 
@@ -89,8 +90,34 @@ public class Schedule_Generator {
 
                 // For each class
                 for (SchoolClass schoolClass : classes) {
+
                     Teacher teacher = getRandomElement(schoolClass.getAllTeachers());
 
+                    // If teacher not available
+                    while (!availableTeachers.contains(teacher)) {
+                        teacher = getRandomElement(schoolClass.getAllTeachers());
+                    }
+
+                    // If he/she have not teaches that class 2 session yet
+                    while (teacher.getClassTeachingSession(schoolClass) <= 0) {
+                        teacher = getRandomElement(schoolClass.getAllTeachers());
+                    }
+
+
+                    // What course he/she teach
+                    Course course = schoolClass.getCourseByTeacher(teacher);
+
+                    // Map period to course
+                    Map<Integer, Course> periodCourse = new HashMap<>();
+                    periodCourse.put(period, course);
+
+                    // Assign schedule to class
+                    schoolClass.setClassSchedule(day, periodCourse);
+
+                    // Teacher is no longer available for this period
+                    availableTeachers.remove(teacher);
+
+                    System.out.println(period + " " + schoolClass.getClassScheduleByDay(day).get(period).getTeachers());
                 }
             }
         }

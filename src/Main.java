@@ -26,12 +26,12 @@ public class Main {
         Teacher Xavier = new Teacher("Xavier", Arrays.asList("morning"), java, network);
         Teacher John = new Teacher("John", Arrays.asList("morning"), network, isad);
 
-        List<Teacher> teacher = new ArrayList<>();
-        teacher.add(Thy);
-        teacher.add(Jack);
-        teacher.add(Rose);
-        teacher.add(Xavier);
-        teacher.add(John);
+        List<Teacher> teachers = new ArrayList<>();
+        teachers.add(Thy);
+        teachers.add(Jack);
+        teachers.add(Rose);
+        teachers.add(Xavier);
+        teachers.add(John);
 
 //        Print course teacher
 //        System.out.println(java.getTeachers());
@@ -58,7 +58,8 @@ public class Main {
         classes.add(E4);
         classes.add(E5);
 
-        Schedule_Generator.assignCourse(classes, courses, teacher);
+        Schedule_Generator.generateSchedule(classes, courses, teachers);
+
         //for (SchoolClass myClass : classes) {
         //    System.out.println(myClass.getAssignedTeacher().get(java).getName());
         //}
