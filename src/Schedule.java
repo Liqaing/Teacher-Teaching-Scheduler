@@ -1,53 +1,70 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 public class Schedule {
-    // String = day (Monday)
-    Map<String, SessionPeriod> schedule;
+    // String = day (Monday, Tuesday...)
+    Map<String, List<SessionPeriod>> schedule;
 
     public Schedule() {
         schedule = new HashMap<>();
     }
 
     public void addSchedulePeriod(String day, SessionPeriod sessionPeriod) {
-        this.schedule.put(day, sessionPeriod);
+        this.schedule.computeIfAbsent(day, k -> new ArrayList<>()).add(sessionPeriod);
     }
 
     public void printSchedule() {
         //String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         //Integer[] periods = {1, 2};
+        // Print period 1 , 2
+        // Course, class, teacher
+
+        //System.out.println(sessions.getPeriod());
+        //
         //for (String day : days) {
-        //    for (int period : periods) {
-        //        SessionPeriod todaySchedule = schedule.get(day);
+        //    List<SessionPeriod> sessionPeriods = schedule.get(day);
         //
-        //        Session session = todaySchedule.getPeriod(period);
-        //        Map<SchoolClass, Course> a = session.getSession();
-        //        System.out.println();
-        //        // Print period 1 , 2
-        //        // Course, class, teacher
-        //
+        //    for (SessionPeriod sessionPeriod : sessionPeriods) {
+        //        List<Session> sessions = sessionPeriod.getPeriod();
         //    }
+        //
         //}
-        System.out.println(schedule);
+
+        schedule.forEach((day, sessionPeriodList) -> {
+            System.out.println("Day: " + day);
+
+            sessionPeriodList.forEach(sessionPeriod -> {
+                sessionPeriod.period.forEach((periodNum, sessionList) -> {
+                    System.out.println("  Period " + periodNum + ":");
+
+                    sessionList.forEach(session -> {
+                        session.getSession().forEach((schoolClass, course) ->
+                                System.out.println("    Class: " + schoolClass.getClassName() +
+                                        ", Course: " + course.getCourseName() +
+                                        ", Teacher: " + schoolClass.getTeacherByCourse(course).getTeacherName()));
+                    });
+                });
+            });
+
+            System.out.println(); // Add a line break between days
+        });
     }
 }
 
 class SessionPeriod {
-    Map<Integer, Session> period;
+    Map<Integer, List<Session>> period;
 
     public SessionPeriod() {
         this.period = new HashMap<>();
     }
 
     public void addSessionPeriod(int period, Session session) {
-        this.period.put(period, session);
+        this.period.computeIfAbsent(period, k -> new ArrayList<>()).add(session);
     }
 
-    public Session getPeriod(int periodNum) {
+    public List<Session> getPeriod(int periodNum) {
         return period.get(periodNum);
     }
+
 }
 
 // Map school class to course

@@ -6,9 +6,9 @@ public class Schedule_Generator {
     // number of class = number of teacher
     private int numOfClass = 5;
 
-    public static void sort() {
-
-    }
+    //public static void sort() {
+    //
+    //}
 
     // Get random index from list
     private static <T> T getRandomElement(List<T> list) {
@@ -40,7 +40,11 @@ public class Schedule_Generator {
                 }
                 // If teacher already teach 5 class
                 while (teacher.getNumberOfTeachingClass() <= 0) {
-                    availableTeachers.remove(teacher);
+
+                    if (availableTeachers != null) {
+                        availableTeachers.remove(teacher);
+                    }
+
                     try {
                         teacher = getRandomElement(availableTeachers);
                     }
@@ -51,7 +55,11 @@ public class Schedule_Generator {
 
                 // If teacher has been assign to the class yet
                 while (schoolClass.isTheTeacherAssigned(teacher)) {
-                    availableTeachers.remove(teacher);
+
+                    if (availableTeachers != null) {
+                        availableTeachers.remove(teacher);
+                    }
+
                     try {
                         teacher = getRandomElement(availableTeachers);
                     }
@@ -86,10 +94,13 @@ public class Schedule_Generator {
         Schedule schedule = new Schedule();
 
         for (String day : days) {
-            for (Integer period : periods) {
+            for (int period : periods) {
 
                 // Initialize new period
                 SessionPeriod sessionPeriod = new SessionPeriod();
+
+                // Create new session
+                Session session = new Session();
 
                 // List of all teachers
                 List<Teacher> availableTeachers = new ArrayList<>(teachers);
@@ -104,30 +115,28 @@ public class Schedule_Generator {
                         teacher = getRandomElement(schoolClass.getAllTeachers());
                     }
 
-                    // If he/she have not teaches that class 2 session yet
+                    // If he/she have already teaches that class 2 session
                     while (teacher.getClassTeachingSession(schoolClass) <= 0) {
                         teacher = getRandomElement(schoolClass.getAllTeachers());
                     }
-
 
                     // What course he/she teach
                     Course course = schoolClass.getCourseByTeacher(teacher);
 
                     // Create new session and map class to course
-                    Session session = new Session();
+
                     session.addSession(schoolClass, course);
-
-                    // Add session to period
-                    sessionPeriod.addSessionPeriod(period, session);
-
-                    // Add to schedule
-                    schedule.addSchedulePeriod(day, sessionPeriod);
 
                     // Teacher is no longer available for this period
                     availableTeachers.remove(teacher);
 
                     //System.out.println(period + " " + schoolClass.getClassScheduleByDay(day).get(period).getTeachers());
                 }
+                // Add session to period
+                sessionPeriod.addSessionPeriod(period, session);
+
+                // Add to schedule
+                schedule.addSchedulePeriod(day, sessionPeriod);
             }
         }
         // Print schedule

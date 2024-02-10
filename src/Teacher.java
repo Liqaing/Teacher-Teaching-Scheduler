@@ -12,9 +12,6 @@ public class Teacher {
     private int numberOfTeachingClass = 5;
     private Map<SchoolClass, Integer> teachingSession;
 
-    //private int number_of_teaching_course;
-    //private Schedule schedule;
-
     public Teacher(String name, List<String> availability, Course... teaching_Course) {
         this.Name = name;
         Availability = availability;
@@ -44,7 +41,7 @@ public class Teacher {
         this.numberOfTeachingClass--;
     }
 
-    public String getName() {
+    public String getTeacherName() {
         return Name;
     }
 

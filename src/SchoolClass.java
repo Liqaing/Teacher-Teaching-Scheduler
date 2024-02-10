@@ -6,7 +6,6 @@ import java.util.List;
 
 public class SchoolClass {
     private String className;
-    //private Schedule classSchedule;
     private Map<Course, Teacher> assignedTeacher;
 
     public SchoolClass(String className, List<Course> courses) {
@@ -67,11 +66,12 @@ public class SchoolClass {
         return null; // Return null if the teacher is not found
     }
 
-    //public void setClassSchedule(String day, Map<Integer, Course> periodCourse) {
-    //    this.classSchedule.setSchedulePeriod(day, periodCourse);
-    //}
-
-    //public Map<Integer, Course> getClassScheduleByDay(String day) {
-    //    return classSchedule.getScheduleByDay(day);
-    //}
+    public Teacher getTeacherByCourse(Course course) {
+        for (Map.Entry<Course, Teacher> entry : assignedTeacher.entrySet()) {
+            if (entry.getKey().equals(course)) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
 }
