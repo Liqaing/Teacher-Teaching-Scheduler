@@ -2,10 +2,12 @@ import java.util.*;
 
 public class Schedule {
     // String = day (Monday, Tuesday...)
+    String name;
     Map<String, List<SessionPeriod>> schedule;
 
-    public Schedule() {
-        schedule = new HashMap<>();
+    public Schedule(String name) {
+        this.name = name;
+        this.schedule = new HashMap<>();
     }
 
     public void addSchedulePeriod(String day, SessionPeriod sessionPeriod) {
@@ -28,7 +30,7 @@ public class Schedule {
         //    }
         //
         //}
-
+        System.out.println(name);
         schedule.forEach((day, sessionPeriodList) -> {
             System.out.println("Day: " + day);
 

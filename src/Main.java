@@ -20,13 +20,17 @@ public class Main {
         courses.add(isad);
 
         // Teacher
-        Teacher Thy = new Teacher("Thy", Arrays.asList("morning"), cSharp, statistic);
-        Teacher Jack = new Teacher("Jack", Arrays.asList("morning"), java, statistic);
-        Teacher Rose = new Teacher("Rose", Arrays.asList("morning"), cSharp, isad);
-        Teacher Xavier = new Teacher("Xavier", Arrays.asList("morning"), java, network);
-        Teacher John = new Teacher("John", Arrays.asList("morning"), network, isad);
+        Teacher Thy = new Teacher("Thy", true, true, true, cSharp, statistic);
+        Teacher Jack = new Teacher("Jack", true, true, true, java, statistic);
+        Teacher Rose = new Teacher("Rose", true, true, false, cSharp, isad);
+        Teacher Mendeleev = new Teacher("Mendeleev", false, true, false, cSharp, isad);
+        Teacher Xavier = new Teacher("Xavier", true, false, true, java, network);
+        Teacher RichardFeynman = new Teacher("Richard Feynman", false, false, true, statistic, network);
+        Teacher John = new Teacher("John", true, true, true, network, isad);
 
         List<Teacher> teachers = new ArrayList<>();
+        teachers.add(RichardFeynman);
+        teachers.add(Mendeleev);
         teachers.add(Thy);
         teachers.add(Jack);
         teachers.add(Rose);
@@ -45,20 +49,20 @@ public class Main {
 //        }
 
         // List of class
-        SchoolClass E1 = new SchoolClass("E1", courses);
-        SchoolClass E2 = new SchoolClass("E2", courses);
-        SchoolClass E3 = new SchoolClass("E3", courses);
-        SchoolClass E4 = new SchoolClass("E4", courses);
-        SchoolClass E5 = new SchoolClass("E5", courses);
+        //SchoolClass E1 = new SchoolClass("E1", courses);
+        //SchoolClass E2 = new SchoolClass("E2", courses);
+        //SchoolClass E3 = new SchoolClass("E3", courses);
+        //SchoolClass E4 = new SchoolClass("E4", courses);
+        //SchoolClass E5 = new SchoolClass("E5", courses);
+        //
+        //List<SchoolClass> classes = new ArrayList<>();
+        //classes.add(E1);
+        //classes.add(E2);
+        //classes.add(E3);
+        //classes.add(E4);
+        //classes.add(E5);
 
-        List<SchoolClass> classes = new ArrayList<>();
-        classes.add(E1);
-        classes.add(E2);
-        classes.add(E3);
-        classes.add(E4);
-        classes.add(E5);
-
-        Schedule_Generator.generateSchedule(classes, courses, teachers);
+        Schedule_Generator.generateSchedule(courses, teachers);
 
         //for (SchoolClass myClass : classes) {
         //    System.out.println(myClass.getAssignedTeacher().get(java).getName());

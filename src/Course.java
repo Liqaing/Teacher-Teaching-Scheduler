@@ -17,8 +17,33 @@ public class Course {
         }
     }
 
-    public List<Teacher> getTeachers() {
-        return teachers;
+    public List<Teacher> getTeachers(String availability) {
+        List<Teacher> availableTeachers = new ArrayList<>();
+
+        // Get only teacher whi available in certain time
+        if (availability.equals("Morning")) {
+            for (Teacher teacher : teachers) {
+                if (teacher.isMorning()) {
+                    availableTeachers.add(teacher);
+                }
+            }
+        }
+        else if (availability.equals("Afternoon")) {
+            for (Teacher teacher : teachers) {
+                if (teacher.isAfternoon()) {
+                    availableTeachers.add(teacher);
+                }
+            }
+        }
+        else if (availability.equals("Evening")) {
+            for (Teacher teacher : teachers) {
+                if (teacher.isEvening()) {
+                    availableTeachers.add(teacher);
+                }
+            }
+        }
+
+        return availableTeachers;
     }
 
     public String getCourseName() {
