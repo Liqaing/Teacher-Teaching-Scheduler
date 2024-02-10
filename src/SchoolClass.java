@@ -6,13 +6,13 @@ import java.util.List;
 
 public class SchoolClass {
     private String className;
-    private Schedule classSchedule;
+    //private Schedule classSchedule;
     private Map<Course, Teacher> assignedTeacher;
 
     public SchoolClass(String className, List<Course> courses) {
         this.className = className;
         this.assignedTeacher = new HashMap<>();
-        this.classSchedule = new Schedule();
+        //this.classSchedule = new Schedule();
         for (Course course : courses) {
             assignedTeacher.put(course, null);
         }
@@ -55,8 +55,7 @@ public class SchoolClass {
     }
 
     public List<Teacher> getAllTeachers() {
-        List<Teacher> teachers = new ArrayList<>(assignedTeacher.values());
-        return teachers;
+        return new ArrayList<>(assignedTeacher.values());
     }
 
     public Course getCourseByTeacher(Teacher teacher) {
@@ -68,11 +67,11 @@ public class SchoolClass {
         return null; // Return null if the teacher is not found
     }
 
-    public void setClassSchedule(String day, Map<Integer, Course> periodCourse) {
-        this.classSchedule.setSchedulePeriod(day, periodCourse);
-    }
+    //public void setClassSchedule(String day, Map<Integer, Course> periodCourse) {
+    //    this.classSchedule.setSchedulePeriod(day, periodCourse);
+    //}
 
-    public Map<Integer, Course> getClassScheduleByDay(String day) {
-        return classSchedule.getScheduleByDay(day);
-    }
+    //public Map<Integer, Course> getClassScheduleByDay(String day) {
+    //    return classSchedule.getScheduleByDay(day);
+    //}
 }

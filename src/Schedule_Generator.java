@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class Schedule_Generator {
 
     // number of class = number of teacher
@@ -36,27 +37,26 @@ public class Schedule_Generator {
                 }
                 else {
                     teacher = getRandomElement(availableTeachers);
-
-                    // If teacher already teach 5 class
-                    while (teacher.getNumberOfTeachingClass() <= 0) {
-                        availableTeachers.remove(teacher);
-                        try {
-                            teacher = getRandomElement(availableTeachers);
-                        }
-                        catch (IllegalArgumentException e) {
-                            teacher = getRandomElement(teachers);
-                        }
+                }
+                // If teacher already teach 5 class
+                while (teacher.getNumberOfTeachingClass() <= 0) {
+                    availableTeachers.remove(teacher);
+                    try {
+                        teacher = getRandomElement(availableTeachers);
                     }
+                    catch (IllegalArgumentException e) {
+                        teacher = getRandomElement(teachers);
+                    }
+                }
 
-                    // If teacher has been assign to the class yet
-                    while (schoolClass.isTheTeacherAssigned(teacher)) {
-                        availableTeachers.remove(teacher);
-                        try {
-                            teacher = getRandomElement(availableTeachers);
-                        }
-                        catch (IllegalArgumentException e) {
-                            teacher = getRandomElement(teachers);
-                        }
+                // If teacher has been assign to the class yet
+                while (schoolClass.isTheTeacherAssigned(teacher)) {
+                    availableTeachers.remove(teacher);
+                    try {
+                        teacher = getRandomElement(availableTeachers);
+                    }
+                    catch (IllegalArgumentException e) {
+                        teacher = getRandomElement(teachers);
                     }
                 }
 
@@ -82,8 +82,14 @@ public class Schedule_Generator {
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         Integer[] periods = {1, 2};
 
+        // Initialize new schedule
+        Schedule schedule = new Schedule();
+
         for (String day : days) {
             for (Integer period : periods) {
+
+                // Initialize new period
+                SessionPeriod sessionPeriod = new SessionPeriod();
 
                 // List of all teachers
                 List<Teacher> availableTeachers = new ArrayList<>(teachers);
@@ -107,20 +113,25 @@ public class Schedule_Generator {
                     // What course he/she teach
                     Course course = schoolClass.getCourseByTeacher(teacher);
 
-                    // Map period to course
-                    Map<Integer, Course> periodCourse = new HashMap<>();
-                    periodCourse.put(period, course);
+                    // Create new session and map class to course
+                    Session session = new Session();
+                    session.addSession(schoolClass, course);
 
-                    // Assign schedule to class
-                    schoolClass.setClassSchedule(day, periodCourse);
+                    // Add session to period
+                    sessionPeriod.addSessionPeriod(period, session);
+
+                    // Add to schedule
+                    schedule.addSchedulePeriod(day, sessionPeriod);
 
                     // Teacher is no longer available for this period
                     availableTeachers.remove(teacher);
 
-                    System.out.println(period + " " + schoolClass.getClassScheduleByDay(day).get(period).getTeachers());
+                    //System.out.println(period + " " + schoolClass.getClassScheduleByDay(day).get(period).getTeachers());
                 }
             }
         }
+        // Print schedule
+        schedule.printSchedule();
     }
 
 
