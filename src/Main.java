@@ -22,7 +22,7 @@ public class Main {
         // Teacher
         Teacher Thy = new Teacher("Thy", true, true, true, cSharp, statistic);
         Teacher Jack = new Teacher("Jack", true, true, true, java, statistic);
-        Teacher Rose = new Teacher("Rose", true, true, false, cSharp, isad);
+        Teacher Rose = new Teacher("Rose", true, true, true, cSharp, isad);
         Teacher Mendeleev = new Teacher("Mendeleev", false, true, false, cSharp, isad);
         Teacher Xavier = new Teacher("Xavier", true, false, true, java, network);
         Teacher RichardFeynman = new Teacher("Richard Feynman", false, false, true, statistic, network);

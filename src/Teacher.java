@@ -16,6 +16,20 @@ public class Teacher {
     private boolean isAfternoon;
     private boolean isEvening;
 
+    private int numberOfAssign;
+
+    public void increaseNumberOfAssign() {
+        this.numberOfAssign++;
+    }
+
+    public int getNumberOfAssign() {
+        return numberOfAssign;
+    }
+
+    public void setNumberOfAssign(int numberOfAssign) {
+        this.numberOfAssign = numberOfAssign;
+    }
+
     public Teacher(String name, boolean isMorning, boolean isAfternoon, boolean isEvening, Course... teaching_Course) {
         this.Name = name;
         //Availability = availability;
@@ -82,5 +96,9 @@ public class Teacher {
 
     public boolean isEvening() {
         return isEvening;
+    }
+
+    public List<SchoolClass> getAllTeachingClass() {
+        return new ArrayList<>(teachingSession.keySet());
     }
 }
