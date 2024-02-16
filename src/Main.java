@@ -28,6 +28,11 @@ public class Main {
         Teacher RichardFeynman = new Teacher("Richard Feynman", false, false, true, statistic, network);
         Teacher John = new Teacher("John", true, true, true, network, isad);
 
+        Teacher a = new Teacher("a", false, false, true, network, cSharp);
+        Teacher b = new Teacher("b", false, false, true, java, isad);
+        Teacher c = new Teacher("c", false, false, true, network, statistic);
+        Teacher d = new Teacher("d", false, false, true, statistic, isad);
+
         List<Teacher> teachers = new ArrayList<>();
         teachers.add(RichardFeynman);
         teachers.add(Mendeleev);
@@ -36,6 +41,11 @@ public class Main {
         teachers.add(Rose);
         teachers.add(Xavier);
         teachers.add(John);
+        teachers.add(a);
+        teachers.add(b);
+        teachers.add(c);
+        teachers.add(d);
+
 
 //        Print course teacher
 //        System.out.println(java.getTeachers());
